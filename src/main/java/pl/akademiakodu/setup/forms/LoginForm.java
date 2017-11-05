@@ -1,4 +1,4 @@
-package pl.akademiakodu.setup.models.forms;
+package pl.akademiakodu.setup.forms;
 
 import lombok.Data;
 
