@@ -5,14 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <p th:text="${info}">tekst bledu</p>
-    Log in
+<p th:text="${info}">tekst bledu</p>
+Log in
 
-    <form th:object="${loginForm}" action="/login" method="post">
-        Nickname <input type="text" th:field="*{nickname}"/>
-        Password <input type="password"  th:field="*{password}" />
-        <input type="submit" value="Login"/>
-    </form>
+<form th:object="${loginForm}" action="/login" method="post">
+    Nickname <input type="text" th:field="*{nickname}"/>
+    Password <input type="password"  th:field="*{password}" />
+    <input type="submit" value="Login"/>
+</form>
 
 </body>
 </html>
