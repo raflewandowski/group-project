@@ -1,13 +1,10 @@
 package pl.akademiakodu.setup.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.akademiakodu.setup.models.SessionInfo;
 
 import javax.servlet.http.*;
-import java.util.Arrays;
 
 /**
  * Created by Patryk Dudzik on 02.11.2017.
@@ -16,19 +13,15 @@ import java.util.Arrays;
 @Controller
 public class MainController {
 
-    @Autowired
-    SessionInfo sessionInfo;
-
     @GetMapping ("/")
-    public String mainPage(HttpServletRequest request, ModelMap modelMap) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            Arrays.stream(cookies).forEach(cookie -> {
-                if (cookie.getName().equals("logingInfo")){
-                    sessionInfo.setLogged(true);
-                    sessionInfo.setUsername(cookie.getValue());
-                }
-            });
+    public String mainPage(HttpServletRequest request, HttpSession session, ModelMap modelMap) {
+
+        session = request.getSession();
+        if (session.getAttribute("isLogged") != null) {
+            modelMap.addAttribute("isLogged", true);
+            modelMap.addAttribute("username", session.getAttribute("username"));
+        } else {
+            modelMap.addAttribute("isLogged", false);
         }
         return "indexTemplate";
     }

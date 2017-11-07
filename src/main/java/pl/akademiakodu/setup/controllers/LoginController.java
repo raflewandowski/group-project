@@ -1,14 +1,11 @@
 package pl.akademiakodu.setup.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import pl.akademiakodu.setup.models.SessionInfo;
 import pl.akademiakodu.setup.models.forms.LoginForm;
 
 import javax.servlet.http.*;
-import java.util.Arrays;
 
 /**
  * Created by Patryk Dudzik on 03.11.2017.
@@ -17,13 +14,12 @@ import java.util.Arrays;
 @Controller
 public class LoginController {
 
-    @Autowired
-    SessionInfo sessionInfo;
-
     @GetMapping ("/login")
-    public String login (ModelMap modelMap) {
+    public String login (HttpServletRequest request, HttpSession session, ModelMap modelMap) {
 
-        if (sessionInfo.isLogged()) {
+        session = request.getSession();
+
+        if (session.getAttribute("isLogged") != null) {
             return "redirect:/";
         }
         modelMap.addAttribute("loginForm", new LoginForm());
@@ -31,33 +27,25 @@ public class LoginController {
     }
 
     @PostMapping ("/login")
-    public String loginForm (@ModelAttribute LoginForm loginForm, ModelMap modelMap, HttpServletResponse response) {
+    public String loginForm (@ModelAttribute LoginForm loginForm, ModelMap modelMap,
+                             HttpServletRequest request, HttpSession session) {
 
+        session = request.getSession();
         if (loginForm.getNickname().equals("Patriano") & loginForm.getPassword().equals("1234")) {
-            Cookie newCookie = new Cookie("logingInfo", "Patriano");
-            response.addCookie(newCookie);
+            session.setAttribute("username", "Patriano");
+            session.setAttribute("isLogged", true);
             return "redirect:/";
         }
-        String error= "Bad password or nickname";
+        String error = "Bad password or nickname";
         modelMap.addAttribute("info", error);
-
         return "loginTemplate";
     }
 
     @GetMapping ("/logout")
-    public String logout (HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            Arrays.stream(cookies).forEach(cookie -> {
-                if (cookie.getName().equals("logingInfo")){
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                    sessionInfo.setLogged(false);
-                    sessionInfo.setUsername(null);
+    public String logout (HttpServletRequest request, HttpSession session) {
 
-                }
-            });
-        }
+        session = request.getSession();
+        session.invalidate();
         return "redirect:/";
     }
 }
