@@ -1,8 +1,10 @@
 package pl.akademiakodu.setup.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.akademiakodu.setup.repository.UserRepository;
 
 import javax.servlet.http.*;
 
@@ -12,6 +14,9 @@ import javax.servlet.http.*;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping ("/")
     public String mainPage(HttpServletRequest request, HttpSession session, ModelMap modelMap) {
@@ -23,6 +28,12 @@ public class MainController {
         } else {
             modelMap.addAttribute("isLogged", false);
         }
+        return "indexTemplate";
+    }
+
+    @GetMapping("/all")
+    public String allUsers(ModelMap modelMap){
+        modelMap.addAttribute("users", userRepository.findAll());
         return "indexTemplate";
     }
 }

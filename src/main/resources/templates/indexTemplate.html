@@ -14,6 +14,12 @@
 
     <div th:if="${isLogged} == false">
         <a href="templates/loginTemplate.html" th:href="@{/login}">Log in here</a>
+        <a href="templates/registerTemplate.html" th:href="@{/register}">Register here</a>
     </div>
+
+    <ul >
+        <li th:each="b: ${users}" th:text="|${b.name} - ${b.nickname} (${b.password})|">User</li>
+    </ul>
+
 </body>
 </html>
