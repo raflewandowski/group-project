@@ -1,6 +1,7 @@
 package pl.akademiakodu.setup.models;
 
 import lombok.*;
+import pl.akademiakodu.setup.models.forms.RegisterForm;
 
 import javax.persistence.*;
 
@@ -22,4 +23,13 @@ public class User {
     private String password;
     private String phone;
     private String email;
+
+    public User (RegisterForm form) {
+        name = form.getName();
+        surname = form.getSurname();
+        nickname = form.getNickname();
+        password = form.getPassword();
+        phone = form.getPhone();
+        email = form.getEmail();
+    }
 }
