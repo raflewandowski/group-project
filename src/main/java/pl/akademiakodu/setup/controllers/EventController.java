@@ -1,39 +1,53 @@
-package pl.akademiakodu.setup.controllers;
+    package pl.akademiakodu.setup.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import pl.akademiakodu.setup.forms.EventForm;
-import pl.akademiakodu.setup.repositories.EventRepository;
-import javax.validation.Valid;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.ui.ModelMap;
+    import org.springframework.validation.BindingResult;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.ModelAttribute;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import pl.akademiakodu.setup.forms.EventForm;
+    import pl.akademiakodu.setup.models.EventModel;
+    import pl.akademiakodu.setup.repositories.EventRepository;
+    import pl.akademiakodu.setup.services.EventService;
 
-/**
- * Created by Rafal Lewandowski on 05.11.2017.
- */
-@Controller
-public class EventController {
+    import javax.validation.Valid;
+    import java.util.List;
 
-    @Autowired
-    EventRepository eventRepository;
+    /**
+     * Created by Rafal Lewandowski on 05.11.2017.
+     */
+    @Controller
+    public class EventController {
 
-    @GetMapping("/eventhost")
-    public String eventHostPage(ModelMap modelMap){
-        modelMap.addAttribute("eventForm", new EventForm());
-        return "addEventTemplate";
-    }
 
-    @PostMapping("/eventhost")
-    public String eventHostPage(@ModelAttribute("eventForm") @Valid EventForm eventForm, BindingResult result, ModelMap modelMap){
+        @Autowired
+        EventService eventService;
 
-        if(result.hasErrors()){
-            return "addEventTemplate";
+        @GetMapping("/eventhost")
+        public String eventhost (ModelMap modelMap){
+            modelMap.addAttribute("eventForm", new EventForm());
+            return "addingEventTemplate";
         }
 
-        modelMap.addAttribute("eventInformation", modelMap);
-        return "addEventTemplate";
+        @PostMapping("/eventhost")
+        public String eventHostPage(@ModelAttribute("eventForm") @Valid EventForm eventForm, BindingResult result, ModelMap modelMap){
+
+            if(result.hasErrors()){
+                return "addingEventTemplate";
+            }
+
+            List<EventModel> findByTitle = eventService.findByTitle(eventForm.getTitle());
+
+            if (findByTitle.isEmpty()){
+                modelMap.addAttribute("info", "Dodano pomyślnie nowe wydarzenie");
+                eventService.save(new EventModel(eventForm));
+            } else {
+                String error = "Title with this title already exist";
+                modelMap.addAttribute("info", error);
+            }
+            return "addingEventTemplate";
+        }
+
     }
-}
