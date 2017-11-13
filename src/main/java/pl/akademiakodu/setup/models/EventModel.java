@@ -1,14 +1,10 @@
 package pl.akademiakodu.setup.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.akademiakodu.setup.forms.EventForm;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

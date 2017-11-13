@@ -9,7 +9,6 @@
     import org.springframework.web.bind.annotation.PostMapping;
     import pl.akademiakodu.setup.forms.EventForm;
     import pl.akademiakodu.setup.models.EventModel;
-    import pl.akademiakodu.setup.repositories.EventRepository;
     import pl.akademiakodu.setup.services.EventService;
 
     import javax.validation.Valid;
