@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th=" http://thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    Witaj na stronie głównej!
+
+    <div th:if="${isLogged} == true">
+        <p th:text="|${username} is logged in|">info o zalogowaniu</p>
+        <a href="templates/loginTemplate.html" th:href="@{/logout}">Log out here</a>
+    </div>
+
+    <div th:if="${isLogged} == false">
+        <a href="templates/loginTemplate.html" th:href="@{/login}">Log in here</a>
+        <a href="templates/registerTemplate.html" th:href="@{/register}">Register here</a>
+    </div>
+
+    <ul >
+        <li th:each="b: ${users}" th:text="|${b.name} - ${b.nickname} (${b.password})|">User</li>
+    </ul>
+
+</body>
+</html>
