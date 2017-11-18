@@ -7,6 +7,10 @@
 <body>
 Tutaj będą Twoi znajomi
 <br>
-<a href="templates/menuTemplate.html" th:href="@{/menu}">Powrót</a>
+<div th:replace = "menuTemplate :: menu">
+</div>
+<br>
+<a href="templates/indexTemplate.html" th:href="@{/}">Powrót</a>
+
 </body>
 </html>

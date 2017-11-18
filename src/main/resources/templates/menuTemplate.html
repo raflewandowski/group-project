@@ -5,8 +5,9 @@
     <title>Menu</title>
 </head>
 <body>
-Wybierz co chcesz zrobić
-<div >
+<div th:fragment = "menu"  >
+    MENU
+    <br>
     <a href="templates/createEventTemplate.html" th:href="@{/create}">Utwórz wydarzenie</a>
     <br>
     <a href="templates/myEventTemplate.html" th:href="@{/myEvent}">Moje Wydarzenia</a>
@@ -15,7 +16,7 @@ Wybierz co chcesz zrobić
     <br>
     <a href="templates/friendsTemplate.html" th:href="@{/friends}">Znajomi</a>
     <br>
-    <a href="templates/indexTemplate.html" th:href="@{/}">Powrót</a>
+
 
 </div>
 </body>
