@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+<div th:fragment = "menu"  >
+    MENU
+    <br>
+    <a href="templates/createEventTemplate.html" th:href="@{/create}">Utwórz wydarzenie</a>
+    <br>
+    <a href="templates/myEventTemplate.html" th:href="@{/myEvent}">Moje Wydarzenia</a>
+    <br>
+    <a href="templates/SettingsTemplate.html" th:href="@{/settings}">Ustawienia</a>
+    <br>
+    <a href="templates/friendsTemplate.html" th:href="@{/friends}">Znajomi</a>
+    <br>
+
+
+</div>
+</body>
+</html>

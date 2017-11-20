@@ -9,6 +9,9 @@
 
     <div th:if="${isLogged} == true">
         <p th:text="|${username} is logged in|">info o zalogowaniu</p>
+        <div th:replace = "menuTemplate :: menu">
+            a
+        </div>
         <a href="templates/loginTemplate.html" th:href="@{/logout}">Log out here</a>
     </div>
 
