@@ -2,7 +2,7 @@ package pl.akademiakodu.setup.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.akademiakodu.setup.forms.EventForm;
+import pl.akademiakodu.setup.models.forms.EventForm;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package pl.akademiakodu.setup.forms;
+package pl.akademiakodu.setup.models.forms;
 
 import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;

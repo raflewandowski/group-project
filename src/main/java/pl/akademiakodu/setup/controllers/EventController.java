@@ -7,9 +7,9 @@
     import org.springframework.web.bind.annotation.GetMapping;
     import org.springframework.web.bind.annotation.ModelAttribute;
     import org.springframework.web.bind.annotation.PostMapping;
-    import pl.akademiakodu.setup.forms.EventForm;
+    import pl.akademiakodu.setup.models.forms.EventForm;
     import pl.akademiakodu.setup.models.EventModel;
-    import pl.akademiakodu.setup.services.EventService;
+    import pl.akademiakodu.setup.service.EventService;
 
     import javax.validation.Valid;
     import java.util.List;

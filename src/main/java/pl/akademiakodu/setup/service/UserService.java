@@ -4,7 +4,7 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.setup.models.User;
-import pl.akademiakodu.setup.repository.UserRepository;
+import pl.akademiakodu.setup.repository.*;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package pl.akademiakodu.setup.repositories;
+package pl.akademiakodu.setup.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
