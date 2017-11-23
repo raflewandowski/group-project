@@ -1,13 +1,11 @@
 package pl.akademiakodu.setup.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.akademiakodu.setup.models.forms.EventForm;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
+import java.util.*;
 
 /**
  * Created by Rafal Lewandowski on 03.11.2017.
@@ -48,7 +46,12 @@ public class EventModel {
     //Eventhost id
     //Participant id
 
-    public EventModel(EventForm form) {
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "event_eventmanager", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns =
+    @JoinColumn (name = "user_id"))
+    private List<User> eventManager;
+
+    public EventModel(EventForm form, List<User> eventManager) {
         title = form.getTitle();
         startDate = form.getFormatedStartDate();
         endDate = form.getFormatedEndDate();
@@ -63,5 +66,6 @@ public class EventModel {
         participantNumber = form.getParticipantNumber();
         price = form.getPrice();
         timeLog = LocalDateTime.now();
+        this.eventManager = eventManager;
     }
 }

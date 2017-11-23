@@ -11,7 +11,7 @@ import pl.akademiakodu.setup.service.UserService;
 
 import javax.servlet.http.*;
 import javax.validation.Valid;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Patryk Dudzik on 06.11.2017.
@@ -40,7 +40,7 @@ public class RegisterController {
             return "registerTemplate";
         }
 
-        List<User> findByNickname = userService.findByNickname(form.getNickname());
+        List<User> findByNickname = userService.findByUsername(form.getUsername());
         List<User> findByEmail = userService.findByEmail(form.getEmail());
 
         if (findByNickname.isEmpty()) {

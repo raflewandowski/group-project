@@ -4,6 +4,7 @@ import lombok.*;
 import pl.akademiakodu.setup.models.forms.RegisterForm;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Patryk Dudzik on 06.11.2017.
@@ -19,15 +20,18 @@ public class User {
     private Long id;
     private String name;
     private String surname;
-    private String nickname;
+    private String username;
     private String password;
     private String phone;
     private String email;
 
-    public User (RegisterForm form) {
+    @ManyToMany(mappedBy = "eventManager",fetch = FetchType.LAZY)
+    private List<EventModel> hostedEvents;
+
+        public User (RegisterForm form) {
         name = form.getName();
         surname = form.getSurname();
-        nickname = form.getNickname();
+        username = form.getUsername();
         password = form.getPassword();
         phone = form.getPhone();
         email = form.getEmail();

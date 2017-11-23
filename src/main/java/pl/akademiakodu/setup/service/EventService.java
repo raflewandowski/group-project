@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.setup.models.EventModel;
-import pl.akademiakodu.setup.repository.EventRepository;
+import pl.akademiakodu.setup.repository.*;
 
 import java.util.List;
 

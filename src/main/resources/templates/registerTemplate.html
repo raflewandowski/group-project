@@ -15,8 +15,8 @@
     <div style="color:red;" th:if="${#fields.hasErrors('surname')}"  th:errors="*{surname}"></div>
     Surname: <input type="text"  th:field="*{surname}" />
     <br />
-    <div style="color:red;" th:if="${#fields.hasErrors('nickname')}"  th:errors="*{nickname}"></div>
-    Nickname: <input type="text" th:field="*{nickname}"/>
+    <div style="color:red;" th:if="${#fields.hasErrors('username')}"  th:errors="*{username}"></div>
+    Username: <input type="text" th:field="*{username}"/>
     <br />
     <div style="color:red;" th:if="${#fields.hasErrors('password')}"  th:errors="*{password}"></div>
     Password: <input type="password"  th:field="*{password}" />

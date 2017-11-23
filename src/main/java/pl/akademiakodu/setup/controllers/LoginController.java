@@ -9,7 +9,7 @@ import pl.akademiakodu.setup.models.forms.LoginForm;
 import pl.akademiakodu.setup.service.UserService;
 
 import javax.servlet.http.*;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Patryk Dudzik on 03.11.2017.
@@ -36,16 +36,16 @@ public class LoginController {
     public String loginForm (@ModelAttribute LoginForm loginForm, ModelMap modelMap,
                              HttpServletRequest request, HttpSession session) {
         session = request.getSession();
-        String nickname = loginForm.getNickname();
-        List<User> userList = userService.findByNickname(nickname);
+        String username = loginForm.getUsername();
+        List<User> userList = userService.findByUsername(username);
         if (!userList.isEmpty()) {
             if (loginForm.getPassword().equals(userList.get(0).getPassword())) {
-                session.setAttribute("username", loginForm.getNickname());
+                session.setAttribute("username", loginForm.getUsername());
                 session.setAttribute("isLogged", true);
                 return "redirect:/";
             }
         }
-        String error = "Bad password or nickname";
+        String error = "Bad password or username";
         modelMap.addAttribute("info", error);
         return "loginTemplate";
     }

@@ -12,6 +12,5 @@ public class CreateEventController {
     @GetMapping("/create")
     public String createEvent (HttpServletRequest request, HttpSession session, ModelMap modelMap){
         return "createEventTemplate";
-
     }
 }

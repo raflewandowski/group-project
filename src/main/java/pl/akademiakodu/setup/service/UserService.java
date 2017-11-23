@@ -4,9 +4,9 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.setup.models.User;
-import pl.akademiakodu.setup.repository.*;
+import pl.akademiakodu.setup.repository.UserRepository;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Patryk Dudzik on 06.11.2017.
@@ -20,9 +20,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> findByNickname(String nickname) {
-        log.info("finding user by nickname={}", nickname);
-        return userRepository.findByNickname(nickname);
+    public List<User> findByUsername(String username) {
+        log.info("finding user by username={}", username);
+        return userRepository.findByUsername(username);
     }
 
     public List<User> findByEmail(String email) {
