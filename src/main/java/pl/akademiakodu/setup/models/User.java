@@ -4,7 +4,7 @@ import lombok.*;
 import pl.akademiakodu.setup.models.forms.RegisterForm;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Patryk Dudzik on 06.11.2017.
@@ -24,6 +24,10 @@ public class User {
     private String password;
     private String phone;
     private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     @ManyToMany(mappedBy = "eventManager",fetch = FetchType.LAZY)
     private List<EventModel> hostedEvents;
