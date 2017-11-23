@@ -4,7 +4,7 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.setup.models.User;
-import pl.akademiakodu.setup.repository.UserRepository;
+import pl.akademiakodu.setup.repository.*;
 
 import java.util.*;
 
@@ -19,6 +19,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     public List<User> findByUsername(String username) {
         log.info("finding user by username={}", username);
@@ -37,6 +40,7 @@ public class UserService {
 
     public void save(User user) {
         log.info("adding user={}", user);
+        user.setRoles(roleRepository.findByRole("USER"));
         userRepository.save(user);
         log.info("added user={}", user);
     }
