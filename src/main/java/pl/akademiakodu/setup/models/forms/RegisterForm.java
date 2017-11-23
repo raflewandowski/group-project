@@ -23,7 +23,7 @@ public class RegisterForm {
     private String surname;
     @NotBlank
     @Size(min = 3, max = 40)
-    private String nickname;
+    private String username;
     @NotBlank
     @Size(min = 3, max = 80)
     private String password;

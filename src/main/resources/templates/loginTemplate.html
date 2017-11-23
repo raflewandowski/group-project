@@ -9,7 +9,7 @@
 Log in
 
 <form th:object="${loginForm}" action="/login" method="post">
-    Nickname <input type="text" th:field="*{nickname}"/>
+    Username <input type="text" th:field="*{username}"/>
     Password <input type="password"  th:field="*{password}" />
     <input type="submit" value="Login"/>
 </form>

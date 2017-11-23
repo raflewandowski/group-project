@@ -7,9 +7,9 @@
     import org.springframework.web.bind.annotation.GetMapping;
     import org.springframework.web.bind.annotation.ModelAttribute;
     import org.springframework.web.bind.annotation.PostMapping;
-    import pl.akademiakodu.setup.forms.EventForm;
-    import pl.akademiakodu.setup.models.EventModel;
-    import pl.akademiakodu.setup.services.EventService;
+    import pl.akademiakodu.setup.models.*;
+    import pl.akademiakodu.setup.models.forms.EventForm;
+    import pl.akademiakodu.setup.service.*;
 
     import javax.validation.Valid;
     import java.util.List;
@@ -23,6 +23,9 @@
 
         @Autowired
         EventService eventService;
+
+        @Autowired
+        UserService userService;
 
         @GetMapping("/eventhost")
         public String eventhost (ModelMap modelMap){
@@ -41,7 +44,8 @@
 
             if (findByTitle.isEmpty()){
                 modelMap.addAttribute("info", "Dodano pomyślnie nowe wydarzenie");
-                eventService.save(new EventModel(eventForm));
+                List<User> users = userService.findByUsername("patriano");
+                eventService.save(new EventModel(eventForm, users));
             } else {
                 String error = "Title with this title already exist";
                 modelMap.addAttribute("info", error);
