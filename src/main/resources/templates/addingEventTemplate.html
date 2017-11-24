@@ -6,13 +6,13 @@
 </head>
 <body>
 <center><h1 th:text="${error}"></h1></center>
-
+<div th:replace = "menuTemplate :: menu"></div>
 <p th:text="${info}">tekst informacji</p>
 
 <br/>
 
 <div style="width: 100%; height: 100%;">
-    <form th:object="${eventForm}" action="/eventhost" method="post">
+    <form th:object="${eventForm}" th:action="@{/eventhost}" method="post">
         <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         <input placeholder="Nazwa wydarzenia" type="text" th:field="*{title}">
         <br/><br/>

@@ -8,7 +8,7 @@
 
 <p th:text="${info}">tekst informacji</p>
 <br />
-<form th:object="${registerForm}" action="/register" method="post">
+<form th:object="${registerForm}" th:action="@{/register}" method="post">
     <div style="color:red;" th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" ></div>
     Name: <input type="text"  th:field="*{name}" />
     <br />

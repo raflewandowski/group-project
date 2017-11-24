@@ -51,7 +51,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", hostedEvents=" + hostedEvents +
                 '}';
     }
 }
