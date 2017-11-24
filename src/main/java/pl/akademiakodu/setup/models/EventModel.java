@@ -68,4 +68,25 @@ public class EventModel {
         timeLog = LocalDateTime.now();
         this.eventManager = eventManager;
     }
+
+    @Override
+    public String toString() {
+        return "EventModel{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", country='" + country + '\'' +
+                ", location='" + location + '\'' +
+                ", city='" + city + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", participantNumber=" + participantNumber +
+                ", price=" + price +
+                ", timeLog=" + timeLog +
+                '}';
+    }
 }

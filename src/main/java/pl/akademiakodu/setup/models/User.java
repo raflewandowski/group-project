@@ -27,7 +27,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @ManyToMany(mappedBy = "eventManager",fetch = FetchType.LAZY)
     private List<EventModel> hostedEvents;
@@ -39,5 +39,19 @@ public class User {
         password = form.getPassword();
         phone = form.getPhone();
         email = form.getEmail();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", hostedEvents=" + hostedEvents +
+                '}';
     }
 }
