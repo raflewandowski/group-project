@@ -40,7 +40,7 @@ public class UserService {
 
     public void save(User user) {
         log.info("adding user={}", user);
-        user.setRoles(roleRepository.findByRole("USER"));
+        user.setRoles(roleRepository.findByName("USER"));
         userRepository.save(user);
         log.info("added user={}", user);
     }

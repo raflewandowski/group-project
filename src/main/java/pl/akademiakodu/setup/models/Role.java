@@ -3,7 +3,7 @@ package pl.akademiakodu.setup.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Patryk Dudzik on 23.11.2017.
@@ -17,8 +17,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
-    private Set<User> users;
+    private List<User> users;
 }

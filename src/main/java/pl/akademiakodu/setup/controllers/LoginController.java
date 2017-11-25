@@ -1,15 +1,12 @@
 package pl.akademiakodu.setup.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import pl.akademiakodu.setup.models.User;
-import pl.akademiakodu.setup.models.forms.LoginForm;
-import pl.akademiakodu.setup.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.*;
-import java.util.*;
 
 /**
  * Created by Patryk Dudzik on 03.11.2017.
@@ -18,43 +15,17 @@ import java.util.*;
 @Controller
 public class LoginController {
 
-    @Autowired
-    UserService userService;
-
-    @GetMapping ("/login")
-    public String login (HttpServletRequest request, HttpSession session, ModelMap modelMap) {
-
-        session = request.getSession();
-        if (session.getAttribute("isLogged") != null) {
-            return "redirect:/";
-        }
-        modelMap.addAttribute("loginForm", new LoginForm());
-        return "loginTemplate";
+    @GetMapping("/login")
+    public String login() {
+        return "auth/login";
     }
 
-    @PostMapping ("/login")
-    public String loginForm (@ModelAttribute LoginForm loginForm, ModelMap modelMap,
-                             HttpServletRequest request, HttpSession session) {
-        session = request.getSession();
-        String username = loginForm.getUsername();
-        List<User> userList = userService.findByUsername(username);
-        if (!userList.isEmpty()) {
-            if (loginForm.getPassword().equals(userList.get(0).getPassword())) {
-                session.setAttribute("username", loginForm.getUsername());
-                session.setAttribute("isLogged", true);
-                return "redirect:/";
-            }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        String error = "Bad password or username";
-        modelMap.addAttribute("info", error);
-        return "loginTemplate";
-    }
-
-    @GetMapping ("/logout")
-    public String logout (HttpServletRequest request, HttpSession session) {
-
-        session = request.getSession();
-        session.invalidate();
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
