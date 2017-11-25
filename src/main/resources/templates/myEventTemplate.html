@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th=" http://thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>My Events</title>
 </head>
 <body>
-Tutaj zoabczysz swoje wydarzenia
-<br>
-<div th:replace = "menuTemplate :: menu">
-</div>
+    <div>Twoje wydarzenia</div>
+    <br>
+    <div th:replace = "menuTemplate :: menu"></div>
+        <br>
+        <center>
+            <ul>
+                <li th:each="e: ${events}" th:text="|${e.title} - ${e.location} kiedy: ${e.startDate} - (${e.startTime})|">
+                </li>
+            </ul>
+        </center>
 </body>
 </html>
