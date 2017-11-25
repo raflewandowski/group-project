@@ -7,6 +7,7 @@
 </head>
 <body>
 <div th:replace = "menuTemplate :: menu"></div>
+<div th:text="${info}"></div>
 <div th:if="${param.error}">
     Invalid username and password
 </div>

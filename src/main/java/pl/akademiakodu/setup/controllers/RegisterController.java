@@ -9,9 +9,8 @@ import pl.akademiakodu.setup.models.User;
 import pl.akademiakodu.setup.models.forms.*;
 import pl.akademiakodu.setup.service.UserService;
 
-import javax.servlet.http.*;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 /**
  * Created by Patryk Dudzik on 06.11.2017.
@@ -23,13 +22,9 @@ public class RegisterController {
     UserService userService;
 
     @GetMapping("/register")
-    public String register(HttpServletRequest request, HttpSession session, ModelMap modelMap) {
+    public String register(ModelMap modelMap) {
 
         modelMap.addAttribute("registerForm", new RegisterForm());
-        session = request.getSession();
-        if (session.getAttribute("isLogged") != null) {
-            return "redirect:/";
-        }
         return "registerTemplate";
     }
 
@@ -47,7 +42,6 @@ public class RegisterController {
             if (findByEmail.isEmpty()) {
                 modelMap.addAttribute("info", "Zarejestrowano pomyślnie, możesz się teraz zalogować " +
                         "podając login i hasło wpisane podczas rejestracji");
-                modelMap.addAttribute("loginForm", new LoginForm());
                 userService.save(new User(form));
             } else {
                 String error = "Email already in use";
@@ -59,6 +53,6 @@ public class RegisterController {
             modelMap.addAttribute("info", error);
             return "registerTemplate";
         }
-        return "loginTemplate";
+        return "auth/login";
     }
 }

@@ -12,6 +12,7 @@
     import pl.akademiakodu.setup.service.*;
 
     import javax.validation.Valid;
+    import java.security.Principal;
     import java.util.List;
 
     /**
@@ -34,7 +35,8 @@
         }
 
         @PostMapping("/eventhost")
-        public String eventHostPage(@ModelAttribute("eventForm") @Valid EventForm eventForm, BindingResult result, ModelMap modelMap){
+        public String eventHostPage(@ModelAttribute("eventForm") @Valid EventForm eventForm, BindingResult result,
+                                    ModelMap modelMap, Principal principal){
 
             if(result.hasErrors()){
                 return "addingEventTemplate";
@@ -44,7 +46,7 @@
 
             if (findByTitle.isEmpty()){
                 modelMap.addAttribute("info", "Dodano pomyślnie nowe wydarzenie");
-                List<User> users = userService.findByUsername("patriano");
+                List<User> users = userService.findByUsername(principal.getName());
                 eventService.save(new EventModel(eventForm, users));
             } else {
                 String error = "Title with this title already exist";

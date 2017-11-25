@@ -30,4 +30,10 @@ public class EventService {
         eventRepository.save(eventModel);
         log.info("added event={}",eventModel);
     }
+
+    public void delete (EventModel eventModel){
+        log.info("deleting event={}", eventModel);
+        eventRepository.delete(eventModel);
+        log.info("deleting event={}",eventModel);
+    }
 }
